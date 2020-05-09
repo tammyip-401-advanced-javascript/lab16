@@ -4,10 +4,10 @@
 
 'use strict'
 
-const globalEmitter = require('./lib/events.js');
-const pickup = require('./lib/vendor.js');
-const inTransit = require('./lib/driver.js');
-const delivered = require('./lib/vendor.js');
+const globalEmitter = require('../lib/events.js');
+const pickup = require('../lib/vendor.js');
+const inTransit = require('../lib/driver.js');
+const delivered = require('../lib/vendor.js');
 
 let consoleSpy = jest.spyOn(console, 'log');
 
