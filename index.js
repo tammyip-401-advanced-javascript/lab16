@@ -1,35 +1,31 @@
+//define handlers
 // assign a listener
-// raise an event
+// raise/emit an event
 // handle that event
 
 const globalEmitter = require('./lib/events.js');
-const pickup = require('./lib/vendor.js');
-const inTransit = require('./lib/driver.js');
-const delivered = require('./lib/vendor.js');
+const handler = require('./lib/handler.js');
+// const pickup = require('./lib/vendor.js');
+// const inTransit = require('./lib/driver.js');
+// const delivered = require('./lib/vendor.js');
 
-// my event is 'shout-in-forest'
+// // create handler
+// const handler = (payload) => {
+//   // handle that event
+//   console.log(payload);
+// };
 
-// create handler
-const pickup = (payload) => {
-  // handle that event
-  console.log(payload);
-};
+// assign a listener (attach handlers with listeners)
 
-const inTransit = (payload) => {
-  console.log(payload);
-};
+globalEmitter.on('pickup', handler);
 
-const delivered = (payload) => {
-  console.log(payload);
-};
+globalEmitter.on('in-transit', handler);
 
-// assign a listener
-
-globalEmitter.on('pickup', pickup);
-
-globalEmitter.on('in-transit', inTransit);
-
-globalEmitter.on('delivered', delivered);
+globalEmitter.on('confirmation', handler);
 
 require('./lib/vendor.js');
+
 require('./lib/driver.js');
+
+
+

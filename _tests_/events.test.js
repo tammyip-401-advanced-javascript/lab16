@@ -5,7 +5,7 @@
 'use strict'
 
 const globalEmitter = require('../lib/events.js');
-const pickup = require('../lib/vendor.js');
+const handler = require('../lib/handler.js');
 const inTransit = require('../lib/driver.js');
 const delivered = require('../lib/vendor.js');
 
@@ -23,27 +23,32 @@ describe('test handler by emitting events', () => {
       address: '123 Main Street, New York, NY',
     };
 
-    globalEmitter.on('pickup', pickup);
-    globalEmitter.emit('pickup', payload);
-    expect(consoleSpy).toHaveBeenCalledWith(payload);
+    handler(payload);
+    // globalEmitter.on('pickup', pickup);
+    // globalEmitter.emit('pickup', payload);
+    expect(consoleSpy).toHaveBeenCalledWith(payload, '\n');
   });
 
   it('test inTransit handler function', () => {
     consoleSpy.mockClear();
 
-    globalEmitter.on('inTransit', inTransit);
-    globalEmitter.emit('inTransit', payload.orderID);
+    // globalEmitter.on('inTransit', inTransit);
+    // globalEmitter.emit('inTransit', payload.orderID);
 
-    expect(consoleSpy).toHaveBeenCalledWith(payload.orderID);
+    let payload = { orderID: 1 }
+    handler(payload);
+
+    expect(consoleSpy).toHaveBeenCalledWith(payload, '\n');
   });
 
   it('test delivered handler function', () => {
     consoleSpy.mockClear();
 
-    globalEmitter.on('delivered', delivered);
-    globalEmitter.emit('delivered', payload.orderID);
-
-    expect(consoleSpy).toHaveBeenCalledWith(payload.orderID);
+    // globalEmitter.on('delivered', delivered);
+    // globalEmitter.emit('delivered', payload.orderID);
+    let payload = { orderID: 1 }
+    handler(payload);
+    expect(consoleSpy).toHaveBeenCalledWith(payload, '\n');
   });
 });
 
